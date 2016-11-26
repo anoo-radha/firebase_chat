@@ -54,6 +54,8 @@ dependencies {
     compile 'com.google.firebase:firebase-config:9.8.0'
     //for App invites
     compile 'com.google.android.gms:play-services-appinvite:9.8.0'
+    //for AdMob
+    compile 'com.google.android.gms:play-services-ads:9.8.0'
 
     //Firebase UI
     compile 'com.firebaseui:firebase-ui-auth:1.0.0'

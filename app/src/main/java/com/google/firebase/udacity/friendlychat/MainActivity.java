@@ -37,6 +37,8 @@ import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.BuildConfig;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.appinvite.AppInvite;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.android.gms.auth.api.Auth;
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements
     private ImageButton mPhotoPickerButton;
     private EditText mMessageEditText;
     private Button mSendButton;
+    private AdView mAdView;
 
     private String mUsername;
 
@@ -123,6 +126,9 @@ public class MainActivity extends AppCompatActivity implements
         mPhotoPickerButton = (ImageButton) findViewById(R.id.photoPickerButton);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (Button) findViewById(R.id.sendButton);
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         // Initialize message ListView and its adapter
         List<FriendlyMessage> friendlyMessages = new ArrayList<>();
@@ -289,16 +295,31 @@ public class MainActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+        if (mAdView != null) {
+            mAdView.resume();
+        }
     }
 
     @Override
     protected void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
         super.onPause();
         mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
         //if activity is destroyed in a way that has nothing to do with signing out
         // such as screen rotation, the listeners are effectively cleaned up
         detachDatabaseReadListener();
         mMessageAdapter.clear();
+    }
+
+    /** Called before the activity is destroyed */
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
     }
 
     private void onSignedInInitialize(String username){
