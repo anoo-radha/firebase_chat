@@ -42,8 +42,18 @@ dependencies {
     // Displaying images
     compile 'com.github.bumptech.glide:glide:3.6.1'
     //Firebase
+    //for storing text messages in database
     compile 'com.google.firebase:firebase-database:9.8.0'
+    // for authenticating users
     compile 'com.google.firebase:firebase-auth:9.8.0'
+    //for storing audio,video files
+    compile 'com.google.firebase:firebase-storage:9.8.0'
+    //for sending notifications
+    compile 'com.google.firebase:firebase-messaging:9.8.0'
+    //for remote config
+    compile 'com.google.firebase:firebase-config:9.8.0'
+
+    //Firebase UI
     compile 'com.firebaseui:firebase-ui-auth:1.0.0'
 }
 
