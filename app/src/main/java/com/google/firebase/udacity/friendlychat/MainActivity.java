@@ -436,6 +436,7 @@ public class MainActivity extends AppCompatActivity implements
                 .setMessage(getString(R.string.invitation_message))
                 .setCallToActionText(getString(R.string.invitation_cta))
                 .build();
+
         startActivityForResult(intent, REQUEST_INVITE);
     }
 }
